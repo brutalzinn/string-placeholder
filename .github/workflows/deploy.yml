@@ -22,12 +22,11 @@ jobs:
         dotnet-version: '7.0.x'
         include-prerelease: true
 
-
-    - name: Executar testes automatizados
-      run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }} --verbosity minimal
-
     - name: Geração do package
       run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out
+      
+    - name: Executar testes automatizados
+      run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }} --verbosity minimal
 
     - name: Push no NuGet
       run: |
