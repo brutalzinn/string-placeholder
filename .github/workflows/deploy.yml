@@ -12,6 +12,7 @@ jobs:
       CAMINHO_PROJETO: ./StringPlaceholder/StringPlaceholder.csproj
       CAMINHO_PROJETO_TESTES: ./Testes/Testes.csproj
       SOLUCAO: ./StringPlaceholder.sln
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     runs-on: ubuntu-latest
 
