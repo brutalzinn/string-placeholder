@@ -1,17 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>String Placeholder</Title>
 		<Description>Nuget package to loop through text by a specific placeholder pattern. Replacing the found part with the return of a list of methods.</Description>
-		<PackageProjectUrl>https://github.com/brutalzinn/string-placeholder.git</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/brutalzinn/string-placeholder</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/brutalzinn/string-placeholder.git</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageTags>string,placeholder,substitutor</PackageTags>
-		<RepositoryType>git</RepositoryType>
+		<PackageTags>string,placeholder,substitutor,net7.0</PackageTags>
+		<SignAssembly>False</SignAssembly>
+		<Authors>robertocpaes</Authors>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <WarningLevel>1</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <WarningLevel>1</WarningLevel>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,13 +28,6 @@
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
 	</ItemGroup>
 
 </Project>
