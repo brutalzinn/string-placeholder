@@ -23,7 +23,7 @@ jobs:
         include-prerelease: true
 
     - name: Geração do package
-      run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out
+      run: dotnet pack ${{ env.CAMINHO_PROJETO }} -c Release -o out --no-build
       
     - name: Executar testes automatizados
       run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }} --verbosity minimal
