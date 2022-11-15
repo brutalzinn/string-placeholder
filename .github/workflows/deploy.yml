@@ -28,7 +28,7 @@ jobs:
         run: dotnet build ${{ env.SOLUCAO }} --configuration Release
 
       - name: Execute tests
-        run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }} --no-restore --no-build --verbosity minimal
+        run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }}  --verbosity minimal
 
       - name: Pack with dotnet
         run: dotnet pack ${{ env.CAMINHO_PROJETO }} --output nuget-packages --configuration Release
