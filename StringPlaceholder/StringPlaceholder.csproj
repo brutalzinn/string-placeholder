@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Title>String Placeholder</Title>
-		<Description>Nuget package to loop through text by a specific placeholder pattern. Replacing the found part with the return of a list of methods.</Description>
+		<Description>Nuget package to loop through text by a specific especify pattern. Replacing the found part with the return of a list of methods.</Description>
 		<PackageProjectUrl>https://github.com/brutalzinn/string-placeholder</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/brutalzinn/string-placeholder.git</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
