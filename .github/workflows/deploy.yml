@@ -1,4 +1,4 @@
-name: Deploy Nuget com testes
+name: Deploy Nuget
 
 on:
   push:
