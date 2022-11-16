@@ -12,8 +12,10 @@
 		<PackageTags>string,placeholder,substitutor,net7.0</PackageTags>
 		<SignAssembly>False</SignAssembly>
 		<Authors>robertocpaes</Authors>
+		<Version>1.0.1</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageReleaseNotes>1.0.0.1</PackageReleaseNotes>
+		<AssemblyVersion>1.0.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
