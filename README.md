@@ -1,4 +1,12 @@
+[![Deploy Nuget com testes](https://github.com/brutalzinn/string-placeholder/actions/workflows/deploy.yml/badge.svg)](https://github.com/brutalzinn/string-placeholder/actions/workflows/deploy.yml)
+
 # String Placeholder 1.0.0
+
+https://www.nuget.org/packages/StringPlaceholder/
+
+```
+dotnet add package StringPlaceholder --version 1.0.0
+```
 
 # [PT - Descrição]
 
