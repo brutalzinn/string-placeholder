@@ -19,7 +19,7 @@ namespace StringPlaceholder
             {
                 var chave = m.Groups[1].ToString().ToUpper();
 
-                if (stringExecutor.Key.Equals(chave))
+                if (stringExecutor.Key.Equals(chave) && replaceDict.ContainsKey(chave) == false)
                 {
                     replaceDict.Add(chave, stringExecutor.Method.Invoke());
                 }
