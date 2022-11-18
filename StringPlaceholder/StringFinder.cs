@@ -13,35 +13,15 @@ namespace StringPlaceholder
         /// <returns></returns>
         public string FindAndReplace(string pattern, string text, StringExecutor stringExecutor)
         {
-            MatchCollection matches = Regex.Matches(text, pattern);
-            var replaceDict = new Dictionary<string, string>();
-            foreach (Match m in matches)
-            {
-                var chave = m.Groups[1].ToString().ToUpper();
-
-                if (stringExecutor.Key.Equals(chave) && replaceDict.ContainsKey(chave) == false)
-                {
-                    replaceDict.Add(chave, stringExecutor.Method.Invoke());
-                }
-                if (stringExecutor.Key.Equals(chave) && replaceDict.ContainsKey(chave))
-                {
-                    replaceDict[chave] = stringExecutor.Method.Invoke();
-                }
-
-            }
-
             return Regex.Replace(text, pattern, match =>
             {
-                var resultado = "";
-                var valorEncontrado = match.Groups[1].ToString().ToUpper();
-                var existeSubstituicao = replaceDict.TryGetValue(valorEncontrado, out resultado);
-                if (existeSubstituicao)
+                var chave = match.Groups[1].ToString().ToUpper();
+                if (stringExecutor.Key.Equals(chave))
                 {
-                    return resultado;
+                    return stringExecutor.Method.Invoke();
                 }
                 return match.Value;
             });
-
         }
     }
 }
