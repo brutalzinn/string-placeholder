@@ -1,10 +1,18 @@
 using StringPlaceholder;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Testes
 {
     public class Program
     {
+        private readonly ITestOutputHelper _testOutputHelper;
+
+        public Program(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+
         [Fact]
         public void FindAndReplace_IfContainsResults_ReturnTrue()
         {
@@ -25,6 +33,26 @@ namespace Testes
             string TestTwo()
             {
                 return "TestTwo!";
+            }
+        }
+        [Fact]
+        public void Depuration()
+        {
+            var text = "Hello, word [RANDOM], [RANDOM] [RANDOM]";
+            var stringPlaceholder = new PlaceholderCreator();
+            var listaExecutors = new List<StringExecutor>()
+            {
+                new StringExecutor("RANDOM", RandomString),
+
+            };
+            var result = stringPlaceholder.Creator(text, listaExecutors);
+            _testOutputHelper.WriteLine($"RESULTADO: {result}");
+            Assert.True(true);
+            string RandomString()
+            {
+                var texts = new List<string>() { "abacate", "mamao", "pera", "banana" };
+                var randomIndex = new Random().Next(0, texts.Count());
+                return texts[randomIndex];
             }
         }
 

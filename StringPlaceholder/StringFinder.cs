@@ -23,11 +23,16 @@ namespace StringPlaceholder
                 {
                     replaceDict.Add(chave, stringExecutor.Method.Invoke());
                 }
+                if (stringExecutor.Key.Equals(chave) && replaceDict.ContainsKey(chave))
+                {
+                    replaceDict[chave] = stringExecutor.Method.Invoke();
+                }
+
             }
 
             return Regex.Replace(text, pattern, match =>
             {
-                string resultado = "";
+                var resultado = "";
                 var valorEncontrado = match.Groups[1].ToString().ToUpper();
                 var existeSubstituicao = replaceDict.TryGetValue(valorEncontrado, out resultado);
                 if (existeSubstituicao)
