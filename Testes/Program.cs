@@ -19,7 +19,11 @@ namespace Testes
             var stringPlaceholder = new PlaceholderCreator();
             var listaExecutors = new List<StringExecutor>()
             {
-                new StringExecutor("TEST1",  TestOne),
+                new StringExecutor("TEST1",  TestOne, "teste", new List<string>()
+                {
+                    "arg1",
+                    "arg2"
+                }),
                 new StringExecutor("TEST2",  TestTwo),
             };
             var result = stringPlaceholder.Creator(text, listaExecutors);

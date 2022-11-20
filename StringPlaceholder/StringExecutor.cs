@@ -17,9 +17,9 @@
         public string Description { get; private set; }
 
         /// <summary>
-        /// How much params this StringExecutor execute?
+        /// Custom param string array
         /// </summary>
-        public int ArgsLength { get; private set; }
+        public IEnumerable<string>? Args { get; private set; }
 
         /// <summary>
         /// [Key] String normalized with upperCase.
@@ -45,13 +45,13 @@
             Description = description;
         }
 
-        public StringExecutor(string key, Func<string[], string> method, string description = "", int argsLength = 0)
+        public StringExecutor(string key, Func<string[], string> method, string description = "", IEnumerable<string>? args = null)
         {
             Key = key;
             MethodParametrized = method;
             MultipleParams = true;
             Description = description;
-            ArgsLength = argsLength;
+            Args = args;
         }
     }
 }
