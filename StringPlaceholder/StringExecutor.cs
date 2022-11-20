@@ -9,8 +9,12 @@
     public class StringExecutor
     {
         public bool EnabledMultipleParams { get => MultipleParams; }
-
         private bool MultipleParams;
+
+        /// <summary>
+        /// Description of this method. Usefull to document placeholder params. This is cool when you use with openapi description.
+        /// </summary>
+        public string Description { get; private set; }
 
         /// <summary>
         /// [Key] String normalized with upperCase.
@@ -18,7 +22,7 @@
         public string Key { get; private set; }
 
         /// <summary>
-        /// [Method]. The method to be called after a pattern is found. This needs be a method that returns string.
+        /// [Method]. The method to be called after a pattern is found. This needs be a method that returns string and receive a string[] as param
         /// </summary>
         public Func<string[], string> MethodParametrized { get; private set; }
 
@@ -27,17 +31,21 @@
         /// </summary>
         public Func<string> Method { get; private set; }
 
-        public StringExecutor(string key, Func<string> method)
+
+
+        public StringExecutor(string key, Func<string> method, string description = "")
         {
             Key = key;
             Method = method;
+            Description = description;
         }
 
-        public StringExecutor(string key, Func<string[], string> method)
+        public StringExecutor(string key, Func<string[], string> method, string description = "")
         {
             Key = key;
             MethodParametrized = method;
             MultipleParams = true;
+            Description = description;
         }
     }
 }
