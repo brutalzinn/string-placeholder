@@ -19,7 +19,7 @@
         /// <summary>
         /// How much params this StringExecutor execute?
         /// </summary>
-        public string ArgsLength { get; private set; }
+        public int ArgsLength { get; private set; }
 
         /// <summary>
         /// [Key] String normalized with upperCase.
@@ -51,6 +51,7 @@
             MethodParametrized = method;
             MultipleParams = true;
             Description = description;
+            ArgsLength = argsLength;
         }
     }
 }
