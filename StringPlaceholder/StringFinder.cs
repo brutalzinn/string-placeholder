@@ -23,5 +23,28 @@ namespace StringPlaceholder
                 return match.Value;
             });
         }
+
+        public string FindAndReplaceWithParams(string pattern, string text, StringExecutor stringExecutor)
+        {
+            var paramsRegex = @"\((.*?)\)";
+            //string[] paramsFound = new string[] { };
+            string key = "";
+            return Regex.Replace(text, pattern, match =>
+            {
+                var textFound = match.Groups[1].ToString().ToUpper();
+                Regex r = new Regex(paramsRegex);
+                Match m = r.Match(textFound);
+                key = textFound.Substring(0, m.Index);
+
+                if (m.Success && stringExecutor.Key.Equals(key))
+                {
+                    var paramsSalinized = m.Groups[1].Value.Replace(" ", string.Empty).ToLower();
+                    var paramsFound = paramsSalinized.Split(',');
+                    return stringExecutor.MethodParametrized.Invoke(paramsFound);
+                }
+
+                return match.Value;
+            });
+        }
     }
 }

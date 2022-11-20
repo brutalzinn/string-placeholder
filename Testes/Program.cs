@@ -12,6 +12,34 @@ namespace Testes
         {
             _testOutputHelper = testOutputHelper;
         }
+        [Fact]
+        public void FindAndReplaceParametrized_IfContainsResults_ReturnTrue()
+        {
+            var text = "Hello, word [TEST1(http://google.com.br)], [TEST2(teste1,teste2, abacate)]";
+            var stringPlaceholder = new PlaceholderCreator();
+            var listaExecutors = new List<StringExecutor>()
+            {
+                new StringExecutor("TEST1",  TestOne),
+                new StringExecutor("TEST2",  TestTwo),
+            };
+            var result = stringPlaceholder.Creator(text, listaExecutors);
+
+            _testOutputHelper.WriteLine($"RESULTADO: {result}");
+
+            Assert.Contains("TestOne! http://google.com.br", result);
+            Assert.Contains("TestTwo! teste1, teste2, abacate", result);
+
+
+            string TestOne(string[] objParams)
+            {
+                return "TestOne! " + objParams[0];
+            }
+            string TestTwo(string[] objParams)
+            {
+                var result = string.Join(", ", objParams);
+                return "TestTwo! " + result;
+            }
+        }
 
         [Fact]
         public void FindAndReplace_IfContainsResults_ReturnTrue()

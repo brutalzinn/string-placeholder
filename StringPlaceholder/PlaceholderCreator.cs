@@ -14,7 +14,8 @@
             var newText = text;
             foreach (var executor in listExecutors)
             {
-                newText = FindAndReplace(pattern, newText, executor);
+                var enabledMultipleParams = executor.EnabledMultipleParams;
+                newText = enabledMultipleParams ? FindAndReplaceWithParams(pattern, newText, executor) : FindAndReplace(pattern, newText, executor);
             }
             return newText;
         }
