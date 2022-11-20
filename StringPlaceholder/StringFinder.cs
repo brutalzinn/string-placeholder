@@ -27,7 +27,6 @@ namespace StringPlaceholder
         public string FindAndReplaceWithParams(string pattern, string text, StringExecutor stringExecutor)
         {
             var paramsRegex = @"\((.*?)\)";
-            //string[] paramsFound = new string[] { };
             string key = "";
             return Regex.Replace(text, pattern, match =>
             {
