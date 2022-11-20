@@ -12,9 +12,14 @@
         private bool MultipleParams;
 
         /// <summary>
-        /// Description of this method. Usefull to document placeholder params. This is cool when you use with openapi description.
+        /// Description of this StringExecutor. Usefull to document placeholder params. This is cool when you use with openapi description.
         /// </summary>
         public string Description { get; private set; }
+
+        /// <summary>
+        /// How much params this StringExecutor execute?
+        /// </summary>
+        public string ArgsLength { get; private set; }
 
         /// <summary>
         /// [Key] String normalized with upperCase.
@@ -40,7 +45,7 @@
             Description = description;
         }
 
-        public StringExecutor(string key, Func<string[], string> method, string description = "")
+        public StringExecutor(string key, Func<string[], string> method, string description = "", int argsLength = 0)
         {
             Key = key;
             MethodParametrized = method;
