@@ -1,4 +1,5 @@
 using StringPlaceholder;
+using StringPlaceholder.FluentPattern;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -134,21 +135,45 @@ namespace Testes
                 return "TestTwo!";
             }
         }
+  
 
         [Fact]
-        public void FindAndReplaceWithCustomPattern_IfTextWithWrongFormatNoContainsResults_ReturnTrue()
+        public void FindAndReplaceWithFluentPattern_BuildExecutorsWithCallback_ReturnTrue()
         {
             var pattern = @"\%(.*?)\%";
-            var text = "Hello, word @TEST1@, @TEST@%";
-            var stringPlaceholder = new PlaceholderCreator();
-            var listaExecutors = new List<StringExecutor>()
+            var inputText = "Hello, word %TEST1%, %TEST2%";
+            var executorCreator = new ExecutorCreator();
+            executorCreator.Create()
+                .Add(new StringExecutor("TEST1", TestOne))
+                .Add(new StringExecutor("TEST2", TestTwo))
+            .Build(pattern, inputText, (result) =>
             {
-                new StringExecutor("TEST1", TestOne),
-                new StringExecutor("TEST2", TestTwo),
-            };
-            var result = stringPlaceholder.Creator(text, listaExecutors, pattern);
-            Assert.DoesNotContain("TestOne!", result);
-            Assert.DoesNotContain("TestTwo!", result);
+                Assert.Contains("TestOne!", result);
+                Assert.Contains("TestTwo!", result);
+            });
+            string TestOne()
+            {
+                return "TestOne!";
+            }
+            string TestTwo()
+            {
+                return "TestTwo!";
+            }
+        }
+
+        [Fact]
+        public void FindAndReplaceWithFluentPattern_BuildExecutors_ReturnTrue()
+        {
+            var pattern = @"\%(.*?)\%";
+            var inputText = "Hello, word %TEST1%, %TEST2%";
+            var executorCreator = new ExecutorCreator();
+            var result = executorCreator.Create()
+                .Add(new StringExecutor("TEST1", TestOne))
+                .Add(new StringExecutor("TEST2", TestTwo))
+            .Build(pattern, inputText);
+           
+            Assert.Contains("TestOne!", result);
+            Assert.Contains("TestTwo!", result);
             string TestOne()
             {
                 return "TestOne!";

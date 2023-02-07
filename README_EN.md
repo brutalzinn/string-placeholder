@@ -1,53 +1,11 @@
 [![Deploy Nuget com testes](https://github.com/brutalzinn/string-placeholder/actions/workflows/deploy.yml/badge.svg)](https://github.com/brutalzinn/string-placeholder/actions/workflows/deploy.yml)
 
-# String Placeholder 1.0.7
+# String Placeholder 2.0.0
 
 https://www.nuget.org/packages/StringPlaceholder/
 
 ```
 dotnet add package StringPlaceholder
-```
-
-# [PT - Descrição]
-
-Pacote nuget para percorrer um texto por um padrão específico de busca. Substituindo a parte encontrada pelo retorno de uma lista de métodos.
-
-
-# [PT - Exemplo]
-
-```
-///Crie seu método string
-
-string TestOne()
-{
-    return "TestOne!";
-}
-string TestTwo()
-{
-    return "TestTwo!";
-}
-
-/// Padrão para busca. Isso é opcional.
-var pattern = @"\%(.*?)\%";
-
-/// A cadeia de caracteres para executar a tarefa.
-var text = "Hello, word %TEST1%, %TEST2%";
-
-/// Crie instância de PlaceholderCreator
-var stringPlaceholder = new PlaceholderCreator();
-
-/// Crie a lista StringExecutor com as chaves e os métodos a serem chamados.
-var listaExecutors = new List<StringExecutor>()
-{
-  	///CHAVE, MÉTODO STRING
-    new StringExecutor("TEST1", TestOne),
-    new StringExecutor("TEST2", TestTwo),
-};
-
-/// Chame o método Creator
-var result = stringPlaceholder.Creator(text, listaExecutors, pattern);
-
-///Result: "Hello, word TestOne!, TestTwo!"
 ```
 
 # [EN - Description]
