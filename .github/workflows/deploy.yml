@@ -10,7 +10,7 @@ jobs:
   deploy:
     env:
       PATH_SOLUTION: ./StringPlaceholder/StringPlaceholder.csproj
-      PATH_SOLUTION_TESTS: ./Testes/Testes.csproj
+      PATH_SOLUTION_TESTS: ./Tests/Tests.csproj
       SOLUTION: ./StringPlaceholder.sln
 
     runs-on: ubuntu-latest
