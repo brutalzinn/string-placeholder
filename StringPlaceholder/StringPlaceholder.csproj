@@ -7,14 +7,14 @@
 		<Description>Nuget package to loop through text by a specific especify pattern. Replacing the found part with the return of a list of methods.</Description>
 		<PackageProjectUrl>https://github.com/brutalzinn/string-placeholder</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/brutalzinn/string-placeholder.git</RepositoryUrl>
-		<PackageReadmeFile>README_EN.md</PackageReadmeFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>string,placeholder,substitutor,net7.0</PackageTags>
 		<SignAssembly>False</SignAssembly>
 		<Authors>robertocpaes</Authors>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageReleaseNotes>2.0.0.0</PackageReleaseNotes>
-		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<PackageReleaseNotes>2.0.0.1</PackageReleaseNotes>
+		<AssemblyVersion>2.0.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,4 +24,12 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <WarningLevel>1</WarningLevel>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
 </Project>
