@@ -170,10 +170,35 @@ namespace Testes
             var result = executorCreator.Create()
                 .Add(new StringExecutor("TEST1", TestOne))
                 .Add(new StringExecutor("TEST2", TestTwo))
-            .Build(pattern, inputText);
+            .Build(pattern, inputText)
+            .Result();
            
             Assert.Contains("TestOne!", result);
             Assert.Contains("TestTwo!", result);
+            string TestOne()
+            {
+                return "TestOne!";
+            }
+            string TestTwo()
+            {
+                return "TestTwo!";
+            }
+        }
+
+        [Fact]
+        public void FindAndReplaceWithFluentPattern_BuildExecutors_ReturnOpenApiDescription()
+        {
+            var pattern = @"\%(.*?)\%";
+            var inputText = "Hello, word %TEST1%, %TEST2%";
+            var result = new ExecutorCreator().Create()
+                .Add(new StringExecutor("TEST1", TestOne))
+                .Add(new StringExecutor("TEST2", TestTwo))
+            .Build(pattern, inputText);
+
+            var openApiDescription = result.GetOpenApiDescription();
+
+            Assert.True(openApiDescription.Count() == 2);
+
             string TestOne()
             {
                 return "TestOne!";

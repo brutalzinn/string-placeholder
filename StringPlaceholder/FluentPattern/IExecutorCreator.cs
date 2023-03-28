@@ -9,8 +9,9 @@ namespace StringPlaceholder.FluentPattern
     public interface IExecutorCreator
     {
         IExecutorCreator Create();
+        string Result();
         IExecutorCreator Build(string pattern, string inputText, Action<string> result);
-        string Build(string pattern, string inputText);
+        IExecutorCreator Build(string pattern, string inputText);
         IExecutorCreator Add(StringExecutor stringExecutor);
         IEnumerable<OpenApiDescription> GetOpenApiDescription();
     }

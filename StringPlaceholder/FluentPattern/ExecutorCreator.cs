@@ -11,6 +11,7 @@ namespace StringPlaceholder.FluentPattern
     {
         private List<StringExecutor> StringExecutorList;
         private List<OpenApiDescription> OpenApiDescriptionList;
+        private string TextWithPlaceholders;
         public ExecutorCreator()
         {
 
@@ -19,14 +20,16 @@ namespace StringPlaceholder.FluentPattern
         {
             StringExecutorList = stringExecutors;
             OpenApiDescriptionList = openApiDescriptions;
+            TextWithPlaceholders = "";
         }
+
         public IExecutorCreator Create()
         {
             var stringExecutors = new List<StringExecutor>();
             var openApiDescriptions = new List<OpenApiDescription>();
             return new ExecutorCreator(stringExecutors, openApiDescriptions);
         }
- 
+
         public IExecutorCreator Add(StringExecutor stringExecutor)
         {
             StringExecutorList.Add(stringExecutor);
@@ -36,16 +39,16 @@ namespace StringPlaceholder.FluentPattern
         {
             OpenApiDescriptionList = CreateOpenApiDescription(StringExecutorList);
             var stringPlaceholder = new PlaceholderCreator();
-            var result = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
-            resultCallback(result);
+            TextWithPlaceholders = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
+            resultCallback(TextWithPlaceholders);
             return this;
         }
-        public string Build(string pattern, string inputText)
+        public IExecutorCreator Build(string pattern, string inputText)
         {
             OpenApiDescriptionList = CreateOpenApiDescription(StringExecutorList);
             var stringPlaceholder = new PlaceholderCreator();
-            var result = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
-            return result;
+            TextWithPlaceholders = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
+            return this;
         }
         public IEnumerable<OpenApiDescription> GetOpenApiDescription()
         {
@@ -59,6 +62,11 @@ namespace StringPlaceholder.FluentPattern
                 openApiDescription.Add(new OpenApiDescription(stringExecutor));
             }
             return openApiDescription;
+        }
+
+        public string Result()
+        {
+            return TextWithPlaceholders;
         }
     }
 }
