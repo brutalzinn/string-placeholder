@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StringPlaceholder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,24 +8,24 @@ namespace StringPlaceholder.FluentPattern
     public class ExecutorCreator : IExecutorCreator
     {
         private List<StringExecutor> StringExecutorList;
-        private List<OpenApiDescription> OpenApiDescriptionList;
+        private List<DescriptionModel> Descriptions;
         private string TextWithPlaceholders;
         public ExecutorCreator()
         {
 
         }
-        public ExecutorCreator(List<StringExecutor> stringExecutors, List<OpenApiDescription> openApiDescriptions)
+        public ExecutorCreator(List<StringExecutor> stringExecutors, List<DescriptionModel> descriptions)
         {
             StringExecutorList = stringExecutors;
-            OpenApiDescriptionList = openApiDescriptions;
+            Descriptions = descriptions;
             TextWithPlaceholders = "";
         }
 
         public IExecutorCreator Init()
         {
             var stringExecutors = new List<StringExecutor>();
-            var openApiDescriptions = new List<OpenApiDescription>();
-            return new ExecutorCreator(stringExecutors, openApiDescriptions);
+            var descriptions = new List<DescriptionModel>();
+            return new ExecutorCreator(stringExecutors, descriptions);
         }
 
         public IExecutorCreator Add(StringExecutor stringExecutor)
@@ -50,18 +51,14 @@ namespace StringPlaceholder.FluentPattern
             TextWithPlaceholders = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
             return this;
         }
-        public IEnumerable<OpenApiDescription> GetDescription()
+        public IEnumerable<DescriptionModel> GetDescription()
         {
-            return OpenApiDescriptionList;
+            return Descriptions;
         }
         public IExecutorCreator BuildDescription()
         {
-            var openApiDescription = new List<OpenApiDescription>();
-            foreach (var stringExecutor in StringExecutorList)
-            {
-                openApiDescription.Add(new OpenApiDescription(stringExecutor));
-            }
-            OpenApiDescriptionList = openApiDescription;
+            var descriptions = DescriptionModel.BuildDescriptionList(StringExecutorList);
+            Descriptions = descriptions;
             return this;
         }
 

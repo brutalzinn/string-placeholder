@@ -19,7 +19,7 @@ namespace Testes
         {
             var text = "Hello, word [TEST1(http://google.com.br)], [TEST2(teste1,teste2, abacate)]";
             var stringPlaceholder = new PlaceholderCreator();
-            var listaExecutors = new List<StringExecutor>()
+            var listExecutors = new List<StringExecutor>()
             {
                 new StringExecutor("TEST1",  TestOne, "teste", new List<string>()
                 {
@@ -28,7 +28,7 @@ namespace Testes
                 }),
                 new StringExecutor("TEST2",  TestTwo),
             };
-            var result = stringPlaceholder.Creator(text, listaExecutors);
+            var result = stringPlaceholder.Creator(text, listExecutors);
 
             _testOutputHelper.WriteLine($"RESULTADO: {result}");
 
@@ -52,12 +52,12 @@ namespace Testes
         {
             var text = "Hello, word [TEST1], [TEST2]";
             var stringPlaceholder = new PlaceholderCreator();
-            var listaExecutors = new List<StringExecutor>()
+            var listExecutors = new List<StringExecutor>()
             {
                 new StringExecutor("TEST1", TestOne),
                 new StringExecutor("TEST2", TestTwo),
             };
-            var result = stringPlaceholder.Creator(text, listaExecutors);
+            var result = stringPlaceholder.Creator(text, listExecutors);
             Assert.Contains("TestOne!", result);
             Assert.Contains("TestTwo!", result);
             string TestOne()
@@ -75,12 +75,12 @@ namespace Testes
         {
             var text = "Hello, word [TEST1], [TEST2] [TEST2]";
             var stringPlaceholder = new PlaceholderCreator();
-            var listaExecutors = new List<StringExecutor>()
+            var listExecutors = new List<StringExecutor>()
             {
                 new StringExecutor("TEST1", TestOne),
                 new StringExecutor("TEST2", TestTwo),
             };
-            var result = stringPlaceholder.Creator(text, listaExecutors);
+            var result = stringPlaceholder.Creator(text, listExecutors);
             Assert.Contains("TestOne!", result);
             Assert.Contains("TestTwo!", result);
             string TestOne()
@@ -99,12 +99,12 @@ namespace Testes
             var pattern = @"\%(.*?)\%";
             var text = "Hello, word %TEST1%, %TEST2%";
             var stringPlaceholder = new PlaceholderCreator();
-            var listaExecutors = new List<StringExecutor>()
+            var listExecutors = new List<StringExecutor>()
             {
                 new StringExecutor("TEST1", TestOne),
                 new StringExecutor("TEST2", TestTwo),
             };
-            var result = stringPlaceholder.Creator(text, listaExecutors, pattern);
+            var result = stringPlaceholder.Creator(text, listExecutors, pattern);
             Assert.Contains("TestOne!", result);
             Assert.Contains("TestTwo!", result);
             string TestOne()

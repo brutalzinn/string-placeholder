@@ -1,8 +1,6 @@
-﻿using System;
+﻿using StringPlaceholder.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StringPlaceholder.FluentPattern
 {
@@ -14,7 +12,7 @@ namespace StringPlaceholder.FluentPattern
         IExecutorCreator Build(string inputText, string pattern = @"\[(.*?)\]");
         IExecutorCreator Add(StringExecutor stringExecutor);
         IExecutorCreator AddRange(IEnumerable<StringExecutor> stringExecutor);
-        IEnumerable<OpenApiDescription> GetDescription();
+        IEnumerable<DescriptionModel> GetDescription();
         IExecutorCreator BuildDescription();
     }
 }

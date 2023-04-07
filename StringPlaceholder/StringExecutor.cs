@@ -11,7 +11,14 @@ namespace StringPlaceholder
     /// </summary>
     public class StringExecutor
     {
+        /// <summary>
+        /// enable multi params
+        /// </summary>
         public bool EnabledMultipleParams { get => MultipleParams; }
+
+        /// <summary>
+        /// internal multiple params arguments
+        /// </summary>
         private bool MultipleParams;
 
         /// <summary>
@@ -44,7 +51,7 @@ namespace StringPlaceholder
         /// </summary>
         /// <param name="key">Unique identifier</param>
         /// <param name="method">Method callback</param>
-        /// <param name="description">Description ( cna be used with OpenApi support to auto description )</param>
+        /// <param name="description">Description ( can be used to give a list about a placeholder )</param>
         public StringExecutor(string key, Func<string> method, string description = "")
         {
             Key = key;
@@ -56,7 +63,7 @@ namespace StringPlaceholder
         /// </summary>
         /// <param name="key">Unique identifier</param>
         /// <param name="method">Method callback with multiple arguments support</param>
-        /// <param name="description">Description ( cna be used with OpenApi support to auto description )</param>
+        /// <param name="description">Description ( can be used to give a list about a placeholder )</param>
         /// <param name="args">Create string executor that accept arguments</param>
         public StringExecutor(string key, Func<string[], string> method, string description = "", IEnumerable<string>? args = null)
         {
