@@ -1,4 +1,7 @@
-﻿namespace StringPlaceholder
+﻿using System;
+using System.Collections.Generic;
+
+namespace StringPlaceholder
 {
     /// <summary>
     /// The schema of StringExecutor.

@@ -8,11 +8,13 @@ namespace StringPlaceholder.FluentPattern
 {
     public interface IExecutorCreator
     {
-        IExecutorCreator Create();
+        IExecutorCreator Init();
         string Result();
-        IExecutorCreator Build(string pattern, string inputText, Action<string> result);
-        IExecutorCreator Build(string pattern, string inputText);
+        IExecutorCreator Build(string inputText, Action<string> result, string pattern = @"\[(.*?)\]");
+        IExecutorCreator Build(string inputText, string pattern = @"\[(.*?)\]");
         IExecutorCreator Add(StringExecutor stringExecutor);
-        IEnumerable<OpenApiDescription> GetOpenApiDescription();
+        IExecutorCreator AddRange(IEnumerable<StringExecutor> stringExecutor);
+        IEnumerable<OpenApiDescription> GetDescription();
+        IExecutorCreator BuildDescription();
     }
 }

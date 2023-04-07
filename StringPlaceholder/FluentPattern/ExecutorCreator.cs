@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace StringPlaceholder.FluentPattern
 {
@@ -23,7 +20,7 @@ namespace StringPlaceholder.FluentPattern
             TextWithPlaceholders = "";
         }
 
-        public IExecutorCreator Create()
+        public IExecutorCreator Init()
         {
             var stringExecutors = new List<StringExecutor>();
             var openApiDescriptions = new List<OpenApiDescription>();
@@ -35,33 +32,37 @@ namespace StringPlaceholder.FluentPattern
             StringExecutorList.Add(stringExecutor);
             return this;
         }
-        public IExecutorCreator Build(string pattern, string inputText, Action<string> resultCallback)
+        public IExecutorCreator AddRange(IEnumerable<StringExecutor> stringExecutor)
         {
-            OpenApiDescriptionList = CreateOpenApiDescription(StringExecutorList);
+            StringExecutorList.AddRange(stringExecutor);
+            return this;
+        }
+        public IExecutorCreator Build(string inputText, Action<string> resultCallback, string pattern)
+        {
             var stringPlaceholder = new PlaceholderCreator();
             TextWithPlaceholders = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
             resultCallback(TextWithPlaceholders);
             return this;
         }
-        public IExecutorCreator Build(string pattern, string inputText)
+        public IExecutorCreator Build(string inputText, string pattern)
         {
-            OpenApiDescriptionList = CreateOpenApiDescription(StringExecutorList);
             var stringPlaceholder = new PlaceholderCreator();
             TextWithPlaceholders = stringPlaceholder.Creator(inputText, StringExecutorList, pattern);
             return this;
         }
-        public IEnumerable<OpenApiDescription> GetOpenApiDescription()
+        public IEnumerable<OpenApiDescription> GetDescription()
         {
             return OpenApiDescriptionList;
         }
-        private List<OpenApiDescription> CreateOpenApiDescription(List<StringExecutor> stringExecutors)
+        public IExecutorCreator BuildDescription()
         {
             var openApiDescription = new List<OpenApiDescription>();
-            foreach (var stringExecutor in stringExecutors)
+            foreach (var stringExecutor in StringExecutorList)
             {
                 openApiDescription.Add(new OpenApiDescription(stringExecutor));
             }
-            return openApiDescription;
+            OpenApiDescriptionList = openApiDescription;
+            return this;
         }
 
         public string Result()

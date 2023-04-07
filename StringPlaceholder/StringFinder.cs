@@ -24,14 +24,13 @@ namespace StringPlaceholder
             });
         }
 
-        public string FindAndReplaceWithParams(string pattern, string text, StringExecutor stringExecutor)
+        public string FindAndReplaceWithParams(string pattern, string text, StringExecutor stringExecutor, string paramPattern = @"\((.*?)\)")
         {
-            var paramsRegex = @"\((.*?)\)";
             string key = "";
             return Regex.Replace(text, pattern, match =>
             {
                 var textFound = match.Groups[1].ToString().ToUpper();
-                Regex r = new Regex(paramsRegex);
+                Regex r = new Regex(paramPattern);
                 Match m = r.Match(textFound);
                 key = textFound.Substring(0, m.Index);
 

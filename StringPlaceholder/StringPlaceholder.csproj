@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<Title>String Placeholder</Title>
 		<Description>Nuget package to loop through text by a specific especify pattern. Replacing the found part with the return of a list of methods.</Description>
 		<PackageProjectUrl>https://github.com/brutalzinn/string-placeholder</PackageProjectUrl>
@@ -11,10 +9,10 @@
 		<PackageTags>string,placeholder,substitutor,net7.0</PackageTags>
 		<SignAssembly>False</SignAssembly>
 		<Authors>robertocpaes</Authors>
-		<Version>2.0.1</Version>
+		<Version>2.0.2</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageReleaseNotes>2.0.0.1</PackageReleaseNotes>
-		<AssemblyVersion>2.0.0.1</AssemblyVersion>
+		<PackageReleaseNotes>2.0.0.2</PackageReleaseNotes>
+		<AssemblyVersion>2.0.0.2</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

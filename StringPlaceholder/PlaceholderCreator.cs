@@ -1,4 +1,6 @@
-﻿namespace StringPlaceholder
+﻿using System.Collections.Generic;
+
+namespace StringPlaceholder
 {
     public class PlaceholderCreator : StringFinder
     {
@@ -15,7 +17,12 @@
             foreach (var executor in listExecutors)
             {
                 var enabledMultipleParams = executor.EnabledMultipleParams;
-                newText = enabledMultipleParams ? FindAndReplaceWithParams(pattern, newText, executor) : FindAndReplace(pattern, newText, executor);
+                if (enabledMultipleParams)
+                {
+                    newText = FindAndReplaceWithParams(pattern, newText, executor);
+                    continue;
+                }
+                newText = FindAndReplace(pattern, newText, executor);
             }
             return newText;
         }

@@ -13,6 +13,7 @@ namespace Testes
         {
             _testOutputHelper = testOutputHelper;
         }
+        #region LEGACY
         [Fact]
         public void FindAndReplaceParametrized_IfContainsResults_ReturnTrue()
         {
@@ -68,26 +69,6 @@ namespace Testes
                 return "TestTwo!";
             }
         }
-        [Fact]
-        public void Depuration()
-        {
-            var text = "Hello, word [RANDOM], [RANDOM] [RANDOM]";
-            var stringPlaceholder = new PlaceholderCreator();
-            var listaExecutors = new List<StringExecutor>()
-            {
-                new StringExecutor("RANDOM", RandomString),
-
-            };
-            var result = stringPlaceholder.Creator(text, listaExecutors);
-            _testOutputHelper.WriteLine($"RESULTADO: {result}");
-            Assert.True(true);
-            string RandomString()
-            {
-                var texts = new List<string>() { "abacate", "mamao", "pera", "banana" };
-                var randomIndex = new Random().Next(0, texts.Count());
-                return texts[randomIndex];
-            }
-        }
 
         [Fact]
         public void FindAndReplaceMultipleTags_IfContainsResults_ReturnTrue()
@@ -135,7 +116,8 @@ namespace Testes
                 return "TestTwo!";
             }
         }
-  
+        #endregion
+
 
         [Fact]
         public void FindAndReplaceWithFluentPattern_BuildExecutorsWithCallback_ReturnTrue()
@@ -143,14 +125,14 @@ namespace Testes
             var pattern = @"\%(.*?)\%";
             var inputText = "Hello, word %TEST1%, %TEST2%";
             var executorCreator = new ExecutorCreator();
-            executorCreator.Create()
+            executorCreator.Init()
                 .Add(new StringExecutor("TEST1", TestOne))
                 .Add(new StringExecutor("TEST2", TestTwo))
-            .Build(pattern, inputText, (result) =>
+            .Build(inputText, (result) =>
             {
                 Assert.Contains("TestOne!", result);
                 Assert.Contains("TestTwo!", result);
-            });
+            }, pattern);
             string TestOne()
             {
                 return "TestOne!";
@@ -167,12 +149,12 @@ namespace Testes
             var pattern = @"\%(.*?)\%";
             var inputText = "Hello, word %TEST1%, %TEST2%";
             var executorCreator = new ExecutorCreator();
-            var result = executorCreator.Create()
+            var result = executorCreator.Init()
                 .Add(new StringExecutor("TEST1", TestOne))
                 .Add(new StringExecutor("TEST2", TestTwo))
-            .Build(pattern, inputText)
+            .Build(inputText, pattern)
             .Result();
-           
+
             Assert.Contains("TestOne!", result);
             Assert.Contains("TestTwo!", result);
             string TestOne()
@@ -190,13 +172,13 @@ namespace Testes
         {
             var pattern = @"\%(.*?)\%";
             var inputText = "Hello, word %TEST1%, %TEST2%";
-            var result = new ExecutorCreator().Create()
+            var result = new ExecutorCreator().Init()
                 .Add(new StringExecutor("TEST1", TestOne))
                 .Add(new StringExecutor("TEST2", TestTwo))
             .Build(pattern, inputText);
 
-            var openApiDescription = result.GetOpenApiDescription();
-
+            result.BuildDescription();
+            var openApiDescription = result.GetDescription();
             Assert.True(openApiDescription.Count() == 2);
 
             string TestOne()
@@ -206,6 +188,28 @@ namespace Testes
             string TestTwo()
             {
                 return "TestTwo!";
+            }
+        }
+
+        [Fact]
+        public void FindAndReplaceWithFluentPattern_BuildExecutorsWithAddRange_ReturnOpenApiDescription()
+        {
+            var pattern = @"\%(.*?)\%";
+            var inputText = "Hello, MR %MY FAVORITE HERO%, your guid is %GUID%";
+            var result = new ExecutorCreator().Init()
+                .AddRange(GetStringExecutors())
+            .Build(pattern, inputText);
+
+            var newText = result.Result();
+            var openApiDescription = result.GetDescription();
+
+            List<StringExecutor> GetStringExecutors()
+            {
+                return new List<StringExecutor>
+                {
+                    new StringExecutor("GUID", () => Guid.NewGuid().ToString(), "Create a GUID"),
+                    new StringExecutor("MY FAVORITE HERO", () => "JOHN WICK", "THE TRUE BABAYAGA"),
+                };
             }
         }
     }
