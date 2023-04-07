@@ -1,6 +1,6 @@
 [![Deploy Nuget with tests](https://github.com/brutalzinn/string-placeholder/actions/workflows/deploy.yml/badge.svg)](https://github.com/brutalzinn/string-placeholder/actions/workflows/deploy.yml)
 
-# String Placeholder 2.0.0
+# String Placeholder 2.0.1
 
 https://www.nuget.org/packages/StringPlaceholder/
 
